@@ -6,7 +6,6 @@ import FriendList from '../components/FriendList';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-
 import Auth from '../utils/auth';
 
 const Profile = (props) => {
@@ -17,19 +16,21 @@ const Profile = (props) => {
   });
 
   const user = data?.me || data?.user || {};
-  // navigate to personal profile page if username is the logged-in user's
+
+  // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/profile" />;
   }
 
-
   if (loading) {
     return <div>Loading...</div>;
   }
+
   if (!user?.username) {
     return (
       <h4>
-        You need to be logged in to see this page. Use the navigation links above to sign up or log in!
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
       </h4>
     );
   }
@@ -38,7 +39,7 @@ const Profile = (props) => {
     <div>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
-          Viewing {user.username}'s profile.
+          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
       </div>
 

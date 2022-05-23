@@ -6,7 +6,6 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
-
 import { setContext } from '@apollo/client/link/context';
 
 import Header from './components/Header';
@@ -59,11 +58,11 @@ function App() {
                 element={<Signup />}
               />
               <Route
-                path="/profile/:username"
+                path="/profile"
                 element={<Profile />}
               />
               <Route
-                path="/profile/"
+                path="/profile/:username"
                 element={<Profile />}
               />
               <Route
